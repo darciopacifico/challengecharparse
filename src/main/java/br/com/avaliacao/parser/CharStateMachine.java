@@ -51,7 +51,7 @@ import java.util.Optional;
  * Asymptotic Analysis:
  * ---------------------
  * The performance is proportional to O(N) characters comparisons.
- * The memory usage is constant, O(1). The discarded WaitEndState states will be collected by GC periodically.
+ * The memory usage is constant, O(1). The discarded WaitEndState states will be collected by the GC periodically.
  *
  */
 public abstract class CharStateMachine {
@@ -67,12 +67,12 @@ public abstract class CharStateMachine {
 
     /**
      * Accessible only by its initialState attribute.
-     * No need to constructors or factories.
+     * No need for constructors or factories.
      */
     private CharStateMachine(){}
 
     /**
-     * Itermediary state to detect the vowel condition
+     * Intermediary state to detect the vowel condition
      */
     private static class WaitConsonantState extends CharStateMachine {
         @Override
