@@ -28,7 +28,6 @@ public class StreamParserTest {
         assertEquals(parseAsStream("zzzzzzzzzAzzzzzzBzzzzzC"), Optional.of('A'));
         assertEquals(parseAsStream(""), Optional.empty());
 
-        StreamParser.analyzeCharSequence("");
 
     }
 
@@ -39,8 +38,6 @@ public class StreamParserTest {
     public void testStateMachineNull(){
 
         assertEquals(parseAsStream(null), Optional.empty());
-
-        StreamParser.analyzeCharSequence("");
 
     }
 
