@@ -59,6 +59,10 @@ public abstract class CharStateMachine {
     //possible states
     private static final CharStateMachine waitConsonant = new WaitConsonantState();
     private static final CharStateMachine waitVowel = new WaitVowelState();
+
+    /**
+     * Initial state! Apply the signal transitions (chars) and hold the next state!
+     */
     public static final CharStateMachine initialState = waitConsonant;
 
     //contract for state machine
