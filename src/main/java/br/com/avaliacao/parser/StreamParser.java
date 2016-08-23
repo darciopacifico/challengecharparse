@@ -11,19 +11,6 @@ import java.util.Optional;
 public class StreamParser {
 
     /**
-     * Analyze the char sequence
-     * @param charSeq
-     */
-    public static void analyzeCharSequence(String charSeq) {
-        Optional<Character> optChar = parseAsStream(charSeq);
-
-        if(optChar.isPresent())
-            System.out.println("O caracter que coincide com as regras é: " + optChar.get());
-        else
-            System.out.println("Nao foi encontrado nenhum caracter que coincida com as regras!");
-    }
-
-    /**
      * Analyze the stream and optionally return the wanted character
      *
      * @param charSeq
