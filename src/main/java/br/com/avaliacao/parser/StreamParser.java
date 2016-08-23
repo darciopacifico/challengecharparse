@@ -1,7 +1,5 @@
 package br.com.avaliacao.parser;
 
-import javax.swing.text.html.Option;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
