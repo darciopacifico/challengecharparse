@@ -20,17 +20,19 @@ public class StreamParser {
         analyzeCharSequence("aAbBABacfu");
         analyzeCharSequence("aAbBABacf");
         analyzeCharSequence("zzzzzzzzzzzzzzzzzzzz");
-        analyzeCharSequence("zzzzzzzzzzzEzzzzzzzz");
+        analyzeCharSequence("");
+
+        analyzeCharSequence("aA+++bBAB&&&acfe");
+        analyzeCharSequence("aAbBABacfE");
+
     }
 
     /**
      * Analyze the char sequence
      * @param charSeq
      */
-    private static void analyzeCharSequence(String charSeq) {
-        Iterator<Character> itChars = CharTypeUtils.toListChar(charSeq).iterator();
-
-        Optional<Character> optChar = getSpecialVowel(itChars);
+    public static void analyzeCharSequence(String charSeq) {
+        Optional<Character> optChar = parseAsStream(charSeq);
 
         if(optChar.isPresent())
             System.out.println("O caracter que coincide com as regras é: " + optChar.get());
@@ -39,11 +41,25 @@ public class StreamParser {
     }
 
     /**
+     * Analyze the stream and optionally return the wanted character
+     *
+     * @param charSeq
+     * @return
+     */
+    public static Optional<Character> parseAsStream(String charSeq) {
+        if(charSeq==null) throw new IllegalArgumentException("Charseq is null!");
+
+        Iterator<Character> itChars = CharTypeUtils.toListChar(charSeq).iterator();
+
+        return getSpecialVowel(itChars);
+    }
+
+    /**
      * Transpose the stream, signaling every read chars as one transition to the state machine.
      * @return optional char
      * @param itChars
      */
-    public static Optional<Character> getSpecialVowel(Iterator<Character> itChars){
+    private static Optional<Character> getSpecialVowel(Iterator<Character> itChars){
         CharStateMachine internalState = CharStateMachine.initialState;
 
         while(itChars.hasNext())
