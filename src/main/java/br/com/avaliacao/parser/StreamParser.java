@@ -20,7 +20,7 @@ public class StreamParser {
     public static Optional<Character> parseAsStream(String charSeq) {
         if(charSeq==null) throw new IllegalArgumentException("Charseq is null!");
 
-        //emulates a char stream
+        //emulates a real char stream. Uses the same signature at least.
         Stream<Character> charStream = CharTypeUtils.toListChar(charSeq).stream();
 
         return getSpecialVowel(charStream);
