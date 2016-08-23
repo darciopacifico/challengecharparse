@@ -11,23 +11,6 @@ import java.util.Optional;
 public class StreamParser {
 
     /**
-     * Main method for the test.
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        analyzeCharSequence("aAbBABacfe");
-        analyzeCharSequence("aAbBABacfu");
-        analyzeCharSequence("aAbBABacf");
-        analyzeCharSequence("zzzzzzzzzzzzzzzzzzzz");
-        analyzeCharSequence("");
-
-        analyzeCharSequence("aA+++bBAB&&&acfe");
-        analyzeCharSequence("aAbBABacfE");
-
-    }
-
-    /**
      * Analyze the char sequence
      * @param charSeq
      */
