@@ -16,7 +16,7 @@ public class CharTypeUtils {
     final static Set<Character> setConsonants = toSetChar("bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ");
 
     public static boolean isVowel(char c){return setVowels.contains(c);}
-    public static boolean isConsanant(char c){return setConsonants.contains(c);}
+    public static boolean isConsonant(char c){return setConsonants.contains(c);}
 
     /**
      * Transform a string into a Set o Chars.

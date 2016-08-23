@@ -77,7 +77,7 @@ public abstract class CharStateMachine {
     private static class WaitConsonantState extends CharStateMachine {
         @Override
         public CharStateMachine signal(Character input) {
-            if (CharTypeUtils.isConsanant(input))
+            if (CharTypeUtils.isConsonant(input))
                 return waitVowel;
             else
                 return this;
@@ -93,7 +93,7 @@ public abstract class CharStateMachine {
     private static class WaitVowelState extends CharStateMachine {
         @Override
         public CharStateMachine signal(Character input) {
-            if (CharTypeUtils.isConsanant(input))
+            if (CharTypeUtils.isConsonant(input))
                 return this;
             else
                 return new WaitEndState(input);
@@ -118,7 +118,7 @@ public abstract class CharStateMachine {
 
         @Override
         public CharStateMachine signal(Character input) {
-            if (CharTypeUtils.isConsanant(input))
+            if (CharTypeUtils.isConsonant(input))
                 return this;
             else
 
