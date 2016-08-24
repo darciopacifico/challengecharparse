@@ -14,10 +14,6 @@ import java.util.Optional;
 
 /**
  * Cart controller for RESTful services
- *
- *
- *
- *
  */
 @RestController
 @RequestMapping("/cart")
