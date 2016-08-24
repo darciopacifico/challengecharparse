@@ -154,6 +154,23 @@ public class ControllerTest {
                 .andExpect(jsonPath("$.mapItems." + cartItemId + ".quantity").value(qtdAlterada))
         ;
 
+        //Adicionando o mesmo produto por acidente. Deve incrementar o item anterior
+        mockMvc.perform(post("/cart/{cartId}/", cartId)
+                .param("codeProd", prodId)
+                .param("quantity", "1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8") )
+        ;
+
+        //check the new quantity+1 for the same cart item
+        mockMvc.perform(get("/cart/{cartId}", cartId))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.cartId").value(cartId))
+                .andExpect(jsonPath("$.mapItems." + cartItemId + ".produto.codigo").value(prodId))
+                .andExpect(jsonPath("$.mapItems." + cartItemId + ".quantity").value(qtdAlterada+1))
+        ;
+
         //cart delete
         mockMvc.perform(delete("/cart/{cartId}", cartId)).andExpect(status().isOk());
 

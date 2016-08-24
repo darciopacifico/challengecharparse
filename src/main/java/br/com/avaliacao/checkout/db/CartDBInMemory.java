@@ -5,13 +5,9 @@ import br.com.avaliacao.checkout.model.CartItem;
 import br.com.avaliacao.checkout.model.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Emulates a DB component for a shopping cart.
@@ -64,22 +60,45 @@ public class CartDBInMemory {
         Cart cart = optCart.orElse(createNewCart());
 
         if(optProd.isPresent()){
+            Produto produto = optProd.get();
+            CartItem item;
 
-            Produto p = optProd.get();
+            if((item = jaPossuiEsteProduto(cart, produto))==null){
 
-            //decentralized id generation
-            String cartItemId = UUID.randomUUID().toString();
-            CartItem item = new CartItem();
-            item.setCartItemId(cartItemId);
-            item.setProduto(p);
-            item.setQuantity(quantity);
-            cart.getMapItems().put(cartItemId,item);
+                //decentralized id generation
+                String cartItemId = UUID.randomUUID().toString();
 
-            return cartItemId;
+                item = new CartItem();
+
+                item.setCartItemId(cartItemId);
+                item.setProduto(produto);
+                item.setQuantity(quantity);
+                cart.getMapItems().put(item.getCartItemId(),item);
+
+            }else{
+                item.setQuantity( item.getQuantity() + quantity );
+            }
+
+            return item.getCartItemId();
         }else{
             throw new IllegalArgumentException("Product {} not found!");
         }
+    }
 
+    /**
+     * Retorna o item que ja possui este produto, caso possua
+     * @param cart
+     * @param p
+     * @return
+     */
+    private CartItem jaPossuiEsteProduto(Cart cart, Produto p) {
+        Collection<CartItem> cartItems = cart.getItems();
+        for(CartItem item : cartItems){
+            if(item.getProduto().getCodigo().equals(p.getCodigo())){
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
