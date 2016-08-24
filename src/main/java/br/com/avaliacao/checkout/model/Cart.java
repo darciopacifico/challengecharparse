@@ -1,6 +1,9 @@
 package br.com.avaliacao.checkout.model;
 
-import java.util.ArrayList;
+import com.google.common.collect.Collections2;
+
+import java.util.*;
+import java.util.function.Consumer;
 
 public class Cart {
 
@@ -8,7 +11,16 @@ public class Cart {
 
     private String cartId;
 
-    private ArrayList<CartItem> items;
+    public Map<String, CartItem> getMapItems() {
+        return mapItems;
+    }
+
+    public void setMapItems(Map<String, CartItem> mapItems) {
+        this.mapItems = mapItems;
+    }
+
+    private Map<String, CartItem> mapItems = new HashMap<>();
+
 
     private CartStatus status = CartStatus.OPENED;
 
@@ -25,18 +37,23 @@ public class Cart {
     }
 
     public void setItems(final ArrayList<CartItem> items) {
-        this.items = items;
+
+        //am i correct??
+        this.mapItems.clear();
+
+        //update map
+        for(CartItem item : items)
+            this.mapItems.put(item.getCartItemId(),item);
+
     }
 
     public void setStatus(final CartStatus status) {
         this.status = status;
     }
 
-    public ArrayList<CartItem> getItems() {
-        if (items == null) {
-            items = new ArrayList<>();
-        }
-        return items;
+    public Collection<CartItem> getItems() {
+
+        return this.mapItems.values();
     }
 
     public boolean isOpened() {
@@ -51,11 +68,16 @@ public class Cart {
         this.status = CartStatus.ACCOMPLISHED;
     }
 
+
     public Double getPrice() {
-        Double total = .0;
-        for (int i=0; i < items.size(); i++) {
-            total += items.get(i).getPrice();
-        }
+
+        Collection<CartItem> items = getItems();
+        Double total = 0.0;
+
+        for(CartItem ci : items)
+            total += ci.getPrice();
+
+
         return total;
     }
 

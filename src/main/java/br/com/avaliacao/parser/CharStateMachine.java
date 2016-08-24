@@ -56,7 +56,7 @@ import java.util.Optional;
  */
 public abstract class CharStateMachine {
 
-    //possible states
+    //possible intermediary states
     private static final CharStateMachine waitConsonant = new WaitConsonantState();
     private static final CharStateMachine waitVowel = new WaitVowelState();
 

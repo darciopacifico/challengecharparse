@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static br.com.avaliacao.parser.StreamParser.parseAsStream;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the StreamParser implementation

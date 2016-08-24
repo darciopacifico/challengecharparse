@@ -2,6 +2,8 @@ package br.com.avaliacao.checkout.model;
 
 public class CartItem {
 
+    private String cartItemId;
+
     private Produto produto;
 
     private Integer quantity;
@@ -29,5 +31,13 @@ public class CartItem {
 
     public void setQuantity(final Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(String cartItemId) {
+        this.cartItemId = cartItemId;
     }
 }
