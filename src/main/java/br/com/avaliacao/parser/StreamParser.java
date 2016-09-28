@@ -44,11 +44,11 @@ public class StreamParser {
      * Consumer for the char stream. Wraps the CharStateMachine instance.
      */
     private static class CharacterConsumer implements Consumer<Character> {
-        CharStateMachine internalState = CharStateMachine.initialState;
+        CharStateMachine localState = CharStateMachine.initialState;
 
         @Override
-        public void accept(Character character) {internalState = internalState.signal(character);}
+        public void accept(Character character) {localState = localState.signal(character);}
 
-        public Optional<Character> getResult(){return internalState.getResult();}
+        public Optional<Character> getResult(){return localState.getResult();}
     }
 }
