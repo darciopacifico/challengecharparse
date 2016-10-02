@@ -1,6 +1,6 @@
 ```
 /**
- * Created by darcio on 8/22/16.
+ * Given a stream, find the first vowel, after a consonant, that is not repeated in the rest of the stream.
  *
  * Nondeterministic Finite Automaton implementation for char transitions:
  *
