@@ -1,30 +1,52 @@
-# Prova Java
-
-Caso de uso: em um API Restful, com back-end isolado do front, é necessário adicionar item(s) no carrinho;
-
-### Detalhes da aplicação
-
-* Projeto Java, configurado p/ JDK 1.8;
-* Build e gestão de dependências no Maven;
-* Projeto c/ suporte a Spring Framework, lombok e Guava;
-* Aplicação web autocontida (tomcat) via Spring Boot;
-* Por simplicidade a persistência default é em memoria;
-
-### Objetivo Geral 
-
-De forma geral o objetivo é avaliar e ajustar, se necessário, as camadas/componentes:
-* API Restful e coesa.
-* Código de fluxo de negócio.
-* Código de infra-estrutura.
-
-### Ponto de Atenção:
-
-Avalie bem o fluxo que adicionar item no carrinho. Analise:
-* Caso o carrinho ja exista, o fluxo para adicionar um novo item está correto? 
-* Posso adicionar o mesmo item mais de uma vez?
-
-### Dicas:
-
-* Cobrir o código de negócio com testes p/ aumentar a agilidade de evolução, além de trazer uma certa visão de impacto na evolução do código;
-* O código deve ser o mais simples e limpo possível, lembre-se que quase sempre nosso dia-a-dia é manutenção.
-* Fique a vontade refatore o quanto você avaliar necessário.
+> /**
+ * Created by darcio on 8/22/16.
+ *
+ * Nondeterministic Finite Automaton implementation for char transitions:
+ *
+ *                            +-------+
+ *                            |       |
+ *                        Consonant   |
+ *                            |       |
+ *                         +--+-------v--+
+ *                         |             |
+ *                  +------>  WaitVowel  +-----+
+ *                  |      |             |     |
+ *                  |      +-------------+     |
+ *             Consonant                    Vowel
+ *                  |                          |     +------+
+ *                  |                          |     |      |
+ *                  |                          |     |   Consonant
+ *       +----------+----+                +----v-----+-+    |
+ *       |  (INITIAL)    |                |            <----+
+ *       | WaitConsonant |                |  WaitEnd   |
+ *       |               |                |            +----+
+ *       +------------+-^+                +---------^--+    |
+ *           ^        | |     Same           |      |     Different
+ *           |        | +-----Last-Vowel-----+      |     Vowel
+ *         Vowel      |                             |       |
+ *           |        |                             +-------+
+ *           +--------+
+ *
+ * (Generics definitions was suppressed for simplicity)
+ *
+ * There are three possible states: two static states, with Optional.Empty as result, waitConsonant and waitVowel
+ * and a third special state, that stores the vowel char in a special condition.
+ *
+ * The third state is the only one instantiated under demand, due to need to store the char. The other ones are static.
+ *
+ * At every signal there are only two transitions for the static states and three transitions for
+ * the special "waitEnd" state:
+ *  1. Consonant
+ *  2. Different Vowel
+ *  3. Same Vowel
+ *
+ * The state transitions are returned by the "signal(char)" method and should be hold by the StateMachine client.
+ *
+ * This class are stateless and thread safe.
+ *
+ * Asymptotic Analysis:
+ * ---------------------
+ * The performance is proportional to O(N) characters comparisons.
+ * The memory usage is constant, O(1). The discarded WaitEndState states will be collected by the GC periodically.
+ *
+ */
