@@ -1,4 +1,5 @@
-> /**
+```
+/**
  * Created by darcio on 8/22/16.
  *
  * Nondeterministic Finite Automaton implementation for char transitions:
@@ -50,3 +51,5 @@
  * The memory usage is constant, O(1). The discarded WaitEndState states will be collected by the GC periodically.
  *
  */
+
+```
